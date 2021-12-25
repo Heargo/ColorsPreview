@@ -33,6 +33,7 @@ export default {
         justify-content:center;
         align-items:center;
         flex-wrap:wrap;
+        z-index: 10;
     }
     .color{
         width:80px;

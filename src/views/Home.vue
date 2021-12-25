@@ -49,20 +49,25 @@ export default {
 }
 </script>
 <style lang="scss">
-
-
-
 .home{
+  height:100vh;
   background-color:#ededed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .TemplateContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: calc(100vh - 100px);
   .row{
     display: flex;
     flex-direction: row;
+    height: 50%;
+    min-height: 350px;
   }
 }
 
@@ -84,6 +89,7 @@ export default {
     font-family: 'Poppins', sans-serif;
 }
 .randomize{
+  position: absolute;
   border:none;
   margin:1rem;
   width:60px;

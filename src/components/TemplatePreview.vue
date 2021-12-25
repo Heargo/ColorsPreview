@@ -79,7 +79,7 @@ export default {
 
     .template{
         background-color:$backColor;
-        margin : 0 .5rem;
+        margin :.5rem;
         border-radius:20px;
         h1{
         font-family: 'Neucha', cursive;
