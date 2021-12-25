@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <!--<HelloWorld msg="Template par Heargo"/>-->
+    <h1 v-if="!used">Palette Previews</h1>
     <Colors/>
     <div v-if="!used" class="buttonsContainer">
       <button class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
@@ -56,6 +57,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  h1{
+    font-size:4rem;
+    font-family: "Poppins", sans-serif;
+    color:#737475;
+  }
 }
 .TemplateContainer{
   display: flex;
@@ -85,7 +91,6 @@ export default {
     font-size: 1.2rem;
     font-weight: bold;
     color:#737475;
-    font-family: 'Neucha', cursive;
     font-family: 'Poppins', sans-serif;
 }
 .randomize{

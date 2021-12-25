@@ -10,9 +10,9 @@
 		cillum dolore eu fugiat nulla pariatur.</p>
 
         <div class="rowBtn">
-            <a href="">Lien cliquable</a>
+            <a href="">Link</a>
 
-            <button>Bouton</button>
+            <button>Button</button>
         </div>
 
 
