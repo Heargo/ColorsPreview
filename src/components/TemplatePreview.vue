@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
     
 
     $backColor:var(--color1);
@@ -81,10 +81,12 @@ export default {
         background-color:$backColor;
         margin :.5rem;
         border-radius:20px;
+        min-height: 350px;
+        min-width: 500px;
+
         h1{
-        font-family: 'Neucha', cursive;
-        font-family: 'Poppins', sans-serif;
-        color:$themeColor2;
+            font-family: 'Poppins', sans-serif;
+            color:$themeColor2;
         }
         p{
             font-family: 'Montserrat', sans-serif;

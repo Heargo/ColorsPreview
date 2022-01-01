@@ -42,3 +42,19 @@ $br-large: only screen and (min-width : 1824px);
 body{
     background-color:#ededed;
 }
+button{
+    border:none;
+    margin:1rem;
+    width:60px;
+    height:60px;
+    border-radius:20px;
+    box-shadow:  6px 6px 12px #c9c9c9,
+         -6px -6px 12px #ffffff;
+    &:hover{
+        box-shadow: inset 6px 6px 12px #c9c9c9,
+        inset -6px -6px 12px #ffffff;
+        img{
+            transform:scale(.9)
+        }
+    }
+}

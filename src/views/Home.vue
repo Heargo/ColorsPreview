@@ -3,6 +3,7 @@
     <!--<HelloWorld msg="Template par Heargo"/>-->
     <h1 v-if="!used">Palette Previews</h1>
     <Colors/>
+
     <div v-if="!used" class="buttonsContainer">
       <button class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
       <button class="customButton" @click="savePalette()">Save palette</button>
@@ -14,7 +15,7 @@
         <TemplatePreview :key="randomizeCounter"/>
       </div>
 
-      <button class="randomize" @click="forceRefresh"><img src="@/assets/svg/dices.svg" alt="randomize"></button>
+    <button class="randomize" @click="forceRefresh"><img src="@/assets/svg/dices.svg" alt="randomize"></button>
 
       <div class='row'>
         <TemplatePreview :key="randomizeCounter"/>
@@ -85,12 +86,13 @@ export default {
 </script>
 <style lang="scss">
 .home{
-  height:100vh;
+  //height:100vh;
   background-color:#ededed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   h1{
     font-size:4rem;
     font-family: "Poppins", sans-serif;
@@ -102,12 +104,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 100px);
+  flex-wrap: wrap;
+  //height: calc(100vh - 100px);
   .row{
     display: flex;
     flex-direction: row;
     height: 50%;
-    min-height: 350px;
   }
 }
 
