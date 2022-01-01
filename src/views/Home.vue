@@ -5,6 +5,7 @@
     <Colors/>
     <div v-if="!used" class="buttonsContainer">
       <button class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
+      <button class="customButton" @click="savePalette()">Save palette</button>
     </div>
     
     <div class="TemplateContainer" v-if="used">
@@ -29,6 +30,7 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Colors from '@/components/Colors.vue'
 import TemplatePreview from '@/components/TemplatePreview.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -43,8 +45,40 @@ export default {
     TemplatePreview
   },
   methods: {
+    ...mapActions([
+      'toastErrorAction'
+    ]),
     forceRefresh(){
       this.randomizeCounter++;
+    },
+    getSavedPalettes(){
+      return JSON.parse(window.localStorage.getItem("palettes"));
+    },
+    savePalette(){
+      //window.localStorage.clear()
+      //get previous palettes
+      var palettes_list=this.getSavedPalettes();
+      var palette = this.$store.state.colors;
+
+      //if valid palette 
+      if (palette.length>2){
+        //if first palette then init
+        if (palettes_list===null){
+          palettes_list=[this.$store.state.colors];
+        }
+        //push to existing palettes
+        else{
+          palettes_list.push(this.$store.state.colors);
+        }
+
+        window.localStorage.setItem("palettes",JSON.stringify(palettes_list))
+        console.log(window.localStorage.getItem("palettes"))
+      }
+      //not valid palette
+      else{
+        this.toastErrorAction("The palette must contain at least 3 colors.")
+      }
+      
     }
   }
 }
@@ -83,7 +117,7 @@ export default {
   align-items: center;
   flex-direction: column;
 }
-.use{
+.use,.customButton{
     margin:1rem;
     width:auto;
     height:auto;
