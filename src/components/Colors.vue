@@ -39,6 +39,7 @@ export default {
         align-items:center;
         flex-wrap:wrap;
         z-index: 10;
+        max-width: calc(100vw - 200px);
     }
     .color{
         width:80px;

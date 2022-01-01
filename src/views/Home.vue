@@ -3,10 +3,10 @@
     <!--<HelloWorld msg="Template par Heargo"/>-->
     <h1 v-if="!used">Palette Previews</h1>
     <Colors/>
-
+    <button class="more"><img src="@/assets/svg/dots.svg" alt="randomize"></button>
     <div v-if="!used" class="buttonsContainer">
       <button class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
-      <button class="customButton" @click="savePalette()">Save palette</button>
+      <button class="customButton" @click="savePalette()">Save this palette</button>
     </div>
     
     <div class="TemplateContainer" v-if="used">
@@ -84,7 +84,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .home{
   //height:100vh;
   background-color:#ededed;
@@ -128,6 +128,22 @@ export default {
     font-weight: bold;
     color:#737475;
     font-family: 'Poppins', sans-serif;
+}
+.more{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:40px;
+  height:40px;
+  border-radius:15px;
+  img{
+    transform:translate(-1px,2px);
+  }
+  &:hover{
+    img{
+      transform:scale(.9)  translate(-1px,2px);
+    }
+  }
 }
 .randomize{
   position: absolute;
