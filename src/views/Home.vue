@@ -190,12 +190,14 @@ export default {
     flex-wrap: wrap;
     justify-content:center;
     align-items:center;
+    margin-top: 50px;
   }
   .toggle{
     position: absolute;
     bottom: 0;
     right:0;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     height:100vh;
     z-index: 11;
     overflow:auto;
