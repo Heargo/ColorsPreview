@@ -3,26 +3,31 @@
     <!--<HelloWorld msg="Template par Heargo"/>-->
     <h1 v-if="!used">Palette Previews</h1>
     <Colors/>
-    <button class="more"><img src="@/assets/svg/dots.svg" alt="randomize"></button>
-    <div v-if="!used" class="buttonsContainer">
-      <button class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
-      <button class="customButton" @click="savePalette()">Save this palette</button>
+    <button :class="{ showSaved: toggleSaved,more:true}" @click="toggleSaved=!toggleSaved" ><img src="@/assets/svg/dots.svg" alt="randomize"></button>
+    <div class="buttonsContainer">
+      <button v-if="!used" class="use" @click="this.$store.state.colors.length >2 ? used=true : used=false">Use this palette</button>
+      <button v-if="used" class="customButton" @click="savePalette()">Save this palette</button>
     </div>
     
     <div class="TemplateContainer" v-if="used">
       <div class='row'>
-        <TemplatePreview :key="randomizeCounter"/>
-        <TemplatePreview :key="randomizeCounter"/>
+        <TemplatePreview :key="refreshCounter"/>
+        <TemplatePreview :key="refreshCounter"/>
       </div>
 
     <button class="randomize" @click="forceRefresh"><img src="@/assets/svg/dices.svg" alt="randomize"></button>
 
       <div class='row'>
-        <TemplatePreview :key="randomizeCounter"/>
-        <TemplatePreview :key="randomizeCounter"/>
+        <TemplatePreview :key="refreshCounter"/>
+        <TemplatePreview :key="refreshCounter"/>
       </div>
-
     </div>
+    <div class='toggle' v-if="toggleSaved">
+      <div class="previewSavedPalettes" :key="refreshCounter">
+        <Palette v-for="(p,i) in getSavedPalettes()" :key="p" :colors='p' :index='i' @click="selectPalette(p)" />
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -31,6 +36,8 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import Colors from '@/components/Colors.vue'
 import TemplatePreview from '@/components/TemplatePreview.vue'
+import Palette from '@/components/Palette.vue'
+
 import { mapActions } from 'vuex'
 
 export default {
@@ -38,22 +45,28 @@ export default {
   data(){
     return{
       used:false,
-      randomizeCounter:0
+      refreshCounter:0,
+      toggleSaved:false,
     }
   },
   components: {
     Colors,
-    TemplatePreview
+    TemplatePreview,
+    Palette
   },
   methods: {
     ...mapActions([
       'toastErrorAction'
     ]),
     forceRefresh(){
-      this.randomizeCounter++;
+      this.refreshCounter++;
     },
     getSavedPalettes(){
       return JSON.parse(window.localStorage.getItem("palettes"));
+    },
+    selectPalette(p){
+      this.$store.state.colors=p;
+      this.toggleSaved=!this.toggleSaved;
     },
     savePalette(){
       //window.localStorage.clear()
@@ -74,6 +87,7 @@ export default {
 
         window.localStorage.setItem("palettes",JSON.stringify(palettes_list))
         console.log(window.localStorage.getItem("palettes"))
+        this.forceRefresh()
       }
       //not valid palette
       else{
@@ -136,14 +150,19 @@ export default {
   width:40px;
   height:40px;
   border-radius:15px;
+  z-index: 12;
+  transition: all 0.2s ease;
   img{
-    transform:translate(-1px,2px);
+    transform:translateX(-1px);
   }
   &:hover{
     img{
-      transform:scale(.9)  translate(-1px,2px);
+      transform:scale(.9)  translateX(-1px);
     }
   }
+}
+.showSaved{
+  transform: rotate(180deg);
 }
 .randomize{
   position: absolute;
@@ -165,5 +184,21 @@ export default {
           transform:scale(.6)  translateX(-9px);
       }
   }
+  }
+  .previewSavedPalettes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items:center;
+  }
+  .toggle{
+    position: absolute;
+    bottom: 0;
+    right:0;
+    width: 500px;
+    height:100vh;
+    z-index: 11;
+    overflow:auto;
+    background-color: #ededed;
   }
 </style>
