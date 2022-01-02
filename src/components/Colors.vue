@@ -6,6 +6,7 @@
             <img src="@/assets/svg/delete.svg" alt="delete" @click="removeColor(i)">
         </div>
         <button @click="addColor" ><img src="@/assets/svg/cross.svg" alt=""></button>
+        
     </div>
 </template>
 
@@ -30,7 +31,7 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
     .ColorsContainer{
         display:flex;
         flex-direction:row;
@@ -38,6 +39,7 @@ export default {
         align-items:center;
         flex-wrap:wrap;
         z-index: 10;
+        max-width: calc(100vw - 200px);
     }
     .color{
         width:80px;
@@ -67,22 +69,6 @@ export default {
             background-color:#c9c9c9;
             padding:0.2rem;
             border-radius:100%;
-        }
-    }
-    button{
-        border:none;
-        margin:1rem;
-        width:60px;
-        height:60px;
-        border-radius:20px;
-        box-shadow:  6px 6px 12px #c9c9c9,
-             -6px -6px 12px #ffffff;
-        &:hover{
-            box-shadow: inset 6px 6px 12px #c9c9c9,
-            inset -6px -6px 12px #ffffff;
-            img{
-                transform:scale(.9)
-            }
         }
     }
     

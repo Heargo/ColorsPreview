@@ -13,6 +13,9 @@ export default createStore({
     },
   },
   actions: {
+    toastErrorAction(state,msg){
+      console.log(msg)
+    },
   },
   modules: {
   }
